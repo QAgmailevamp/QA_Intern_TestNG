@@ -15,8 +15,6 @@ public class BM_AM_GoogleSearch {
 
     @BeforeMethod
     public void setUp() {
-        // Set the path to the ChromeDriver executable, if necessary
-        // System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 

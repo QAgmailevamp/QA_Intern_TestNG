@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="D:/JetBrains/QA">
         <classes>
-            <class name="testClasses.BM_AM_GoogleSearch">
+            <class name="testClasses.OrangeHr">
             </class>
         </classes>
     </test>
