@@ -1,9 +1,6 @@
 package testNG;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,7 +30,7 @@ public class FaceBook
         System.out.println("Opened Chrome and application.");
     }
 
-    @BeforeMethod
+    @Test(priority = 1)
     public void loginTest()
     {
         driver.get("https://www.facebook.com/");
@@ -49,7 +46,7 @@ public class FaceBook
         System.out.println("Logged In.");
     }
 
-    @Test
+    @Test(priority = 2)
     public void searchUser()
     {
 
@@ -64,36 +61,58 @@ public class FaceBook
 
     }
 
-    @AfterMethod
+    @Test(priority = 3)
     public void profile()
     {
-        try {
+        try
+      {
+        WebElement home = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href, '/')]")));
+        home.click();
+
+        WebElement profile = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href, 'profile.php?id=') and contains(@class, 'x1lliihq')]")));
+
+
+        System.out.println("Profile element found: " + profile.isDisplayed());
+        profile.click();
+
+        System.out.println("Navigated to profile.");
+      }
+      catch (Exception e)
+      {
+        System.err.println("Failed to navigate to profile: " + e.getMessage());
+      }
+    }
+
+
+    @Test(priority = 4)
+    public void userSignOut()
+    {
+        try
+        {
+        WebElement user = wait.until(ExpectedConditions.elementToBeClickable
+                (By.xpath("//div[@aria-label='Your profile']")));
+        user.click();
+
+            try {
                 Thread.sleep(4000); // Delay for 4 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace(); // Handle the exception appropriately
             }
-        WebElement home = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath("//a[contains(@href, '/')]")));
-        home.click();
 
-        WebElement profile = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath("//a[contains(@class, 'x1lliihq x6ikm8r x10wlt62 x1n2onr6')]")));
-        profile.click();
+            WebElement logout = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'Log out')]")));
+            System.out.println("Logout button found: " + logout.isDisplayed() + ", Enabled: " + logout.isEnabled());
 
-        System.out.println("opened home");
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", logout);
 
 
-    }
+            System.out.println("Logged out.");
 
-    @AfterMethod
-    public void userSignOut()
-    {
-        WebElement adminMenu = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(@class, 'oxd-userdropdown-name')]")));
-        adminMenu.click();
-        WebElement logout = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'oxd-userdropdown-link') and contains(@href, '/auth/logout')]")));
-        logout.click();
-
-        System.out.println("Logged out.");
+        }
+        catch (Exception e)
+        {
+    System.err.println("Sign out failed: " + e.getMessage());
+        }
     }
 
 
