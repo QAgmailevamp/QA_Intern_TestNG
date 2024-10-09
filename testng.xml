@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="D:/JetBrains/QA">
+<!--<suite name="All Test Suite">-->
+<!--    <test verbose="2" preserve-order="true" name="D:/JetBrains/QA">-->
+<!--        <classes>-->
+<!--            <class name="testClasses.OrangeHrDP">-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--</suite>-->
+<suite name="Cross Browser Testing">
+    <parameter name = "URL" value = "https://testautomationu.applitools.com/"/>
+    <test name = "Test On Chrome">
+        <parameter name = "BrowserType" value = "Chrome"/>
         <classes>
-            <class name="testClasses.OrangeHr">
-            </class>
+            <class name = "testClasses.CrossBrowser"/>
         </classes>
-    </test>
-</suite>
+    </test> <!-- Test On Chrome -->
+    <test name = "Test On IE">
+        <parameter name = "BrowserType" value = "Internet Explorer"/>
+        <classes>
+            <class name = "testClasses.CrossBrowser"/>
+        </classes>
+    </test> <!-- Test On IE -->
+
+
+
+</suite> <!-- Cross Browser Testing -->
