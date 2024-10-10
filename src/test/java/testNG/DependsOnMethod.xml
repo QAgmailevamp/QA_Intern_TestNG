@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Dependency Testing Suite">
+    <test name="OrangeHRM Tests">
+        <classes>
+            <class name="testNG.DependsOnMethod">
+                <methods>
+<!--                    <include name="test1_SetUpChrome"/>-->
+<!--                    <include name="test2_OpenOrangeHRM"/>-->
+<!--                    <include name="test3_SignIn"/>-->
+                    <exclude name="test4_SearchUser"/>
+<!--                    <include name="test5_SearchEmployee"/>-->
+<!--                    <include name="test6_SearchCandidate"/>-->
+<!--                    <include name="test7_SignOut"/>-->
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
